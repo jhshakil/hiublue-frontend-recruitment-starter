@@ -5,7 +5,7 @@ export const metadata = {
   title: "Dashbord",
 };
 
-export default function Page() {
+export default async function Page() {
   return (
     <ProtectedRoute>
       <DashboardView />

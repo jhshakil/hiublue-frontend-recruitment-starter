@@ -6,9 +6,8 @@ const axiosInstance = axios.create({
 });
 
 async function getAccessToken() {
-  
   const userData = localStorage.getItem("user_data_hiublue");
-  const user =  userData ? JSON.parse(userData) : null;
+  const user = userData ? JSON.parse(userData) : null;
   return user?.token;
 }
 
@@ -16,7 +15,7 @@ axiosInstance.interceptors.request.use(
   async function (config) {
     const accessToken = await getAccessToken();
     if (accessToken) {
-      config.headers.authorization = accessToken;
+      config.headers.authorization = "Bearer " + accessToken;
     }
     return config;
   },
