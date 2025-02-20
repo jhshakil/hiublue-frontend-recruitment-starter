@@ -68,7 +68,7 @@ export default function DashboardView() {
       {/* chart  */}
       <Box sx={{ display: "flex", gap: 3, flexWrap: "wrap", mt: 3 }}>
         <WebsiteVisitorChart visitorData={stats?.website_visits || null} />
-        <OfferCountChart />
+        <OfferCountChart offerData={stats?.offers_sent || null} />
       </Box>
       {/* Offer list  */}
       <ShowOfferList />

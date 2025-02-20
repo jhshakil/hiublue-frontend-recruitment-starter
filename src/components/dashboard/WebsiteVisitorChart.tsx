@@ -1,4 +1,4 @@
-import { primary, warning } from "@/theme/palette";
+import { palette, primary, warning } from "@/theme/palette";
 import { TWebsiteVisitor } from "@/types/dashboard.types";
 import { Paper, Typography } from "@mui/material";
 import {
@@ -68,7 +68,8 @@ const WebsiteVisitorChart = ({ visitorData }: Props) => {
         p: 2,
         minWidth: 400,
         borderRadius: "12px",
-        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+        boxShadow:
+          "0px 12px 24px -4px rgba(145, 158, 171, 0.12),0px 0px 2px 0px rgba(145, 158, 171, 0.2)",
       }}
     >
       <Typography variant="h6" gutterBottom>
@@ -79,10 +80,15 @@ const WebsiteVisitorChart = ({ visitorData }: Props) => {
           <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
           <XAxis
             dataKey="name"
-            tick={{ fill: "#7D7D7D", fontSize: 12 }}
+            tick={{ fill: palette.text?.disabled, fontSize: 12 }}
+            axisLine={false}
             tickLine={false}
           />
-          <YAxis tick={{ fill: "#7D7D7D", fontSize: 12 }} tickLine={false} />
+          <YAxis
+            tick={{ fill: palette.text?.disabled, fontSize: 12 }}
+            axisLine={false}
+            tickLine={false}
+          />
           <Tooltip cursor={{ fill: "rgba(0, 0, 0, 0.05)" }} />
           <Legend
             verticalAlign="top"
