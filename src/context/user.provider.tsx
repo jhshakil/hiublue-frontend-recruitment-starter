@@ -23,7 +23,6 @@ import { TUser } from "@/types/user.types";
   
     const handleUser = async () => {
       const userData = localStorage.getItem("user_data_hiublue");
-  
       setUser(userData ? JSON.parse(userData) : null);
       setIsLoading(false);
     };

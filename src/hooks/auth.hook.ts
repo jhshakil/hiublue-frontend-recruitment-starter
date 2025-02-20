@@ -7,9 +7,7 @@ export const useUserLogin = () => {
     mutationKey: ["USER_Login"],
     mutationFn: async (userData) => await loginUser(userData),
     onSuccess: (data) => {
-      console.log("Login Success:", data);
       if (typeof window !== "undefined" && data?.token) {
-        console.log('hi')
         localStorage.setItem("user_data_hiublue", JSON.stringify(data));
       }
     },

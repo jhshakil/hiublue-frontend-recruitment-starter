@@ -93,7 +93,7 @@ export default function SignIn() {
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
       handleUserLogin(data);
-      userLoading(true);
+      
     } catch (error) {
       console.log(error);
     }
@@ -101,6 +101,7 @@ export default function SignIn() {
 
   React.useEffect(() => {
     if (!isPending && isSuccess) {
+      userLoading(true);
       if (redirect) {
         router.push(redirect);
       } else {
