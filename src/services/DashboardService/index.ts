@@ -23,3 +23,27 @@ export const getDashboardStats = async (filter: string) => {
     throw new Error(error);
   }
 };
+
+export const getAllOfferList = async ({
+  search,
+  type,
+  status,
+  page,
+  per_page,
+}: {
+  search: string;
+  type: string;
+  status: string;
+  page: string;
+  per_page: string;
+}) => {
+  try {
+    const { data } = await axiosInstance.get("/offers", {
+      params: { search, type, status, page, per_page },
+    });
+
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
