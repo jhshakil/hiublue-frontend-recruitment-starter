@@ -1,8 +1,10 @@
 export type TUser = {
-  users: {
-    id: string;
-    email: string;
-    name: string;
-  };
+  users: TUserData;
   token: string;
+};
+
+export type TUserData = {
+  id: string;
+  email: string;
+  name: string;
 };

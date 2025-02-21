@@ -165,6 +165,7 @@ export default function OfferList() {
             <MenuItem value="">All</MenuItem>
             <MenuItem value="monthly">Monthly</MenuItem>
             <MenuItem value="yearly">Yearly</MenuItem>
+            <MenuItem value="pay_as_you_go">Pay As You Go</MenuItem>
           </Select>
         </FormControl>
       </Box>
