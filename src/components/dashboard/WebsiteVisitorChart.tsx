@@ -59,6 +59,7 @@ const formatVisitorData = (visitorData: TWebsiteVisitor | null) => {
 };
 
 const WebsiteVisitorChart = ({ visitorData }: Props) => {
+  if (!visitorData) return;
   const websiteVisitsData = formatVisitorData(visitorData);
 
   return (

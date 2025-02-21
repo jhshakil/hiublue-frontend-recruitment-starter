@@ -29,6 +29,7 @@ const formatOfferData = (offerData: TOffer | null) => {
 };
 
 const OfferCountChart = ({ offerData }: Props) => {
+  if (!offerData) return;
   const offersSentData = formatOfferData(offerData);
 
   return (
