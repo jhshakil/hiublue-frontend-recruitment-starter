@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -23,14 +23,8 @@ import { z } from "zod";
 import { TUserData } from "@/types/user.types";
 import { getAllUserData } from "@/services/UserService";
 import { createOffer } from "@/services/OfferService";
-
-type TOfferForm = {
-  plan_type: "pay_as_you_go" | "monthly" | "yearly";
-  additions: ("refundable" | "on_demand" | "negotiable")[];
-  user_id: number; // Change user_id to number
-  expired: string;
-  price: string;
-};
+import debounce from "lodash/debounce";
+import { TOfferForm } from "@/types/onbording.types";
 
 const offerSchema = z.object({
   plan_type: z.enum(["pay_as_you_go", "monthly", "yearly"]),
@@ -57,15 +51,6 @@ export default function OnboardingView() {
   const [usersLoading, setUsersLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [hasMore, setHasMore] = useState<boolean>(true);
-
-  const debounceTimer = useRef<NodeJS.Timeout | null>(null);
-
-  const debounce = (callback: () => void, delay = 500): void => {
-    if (debounceTimer.current) {
-      clearTimeout(debounceTimer.current);
-    }
-    debounceTimer.current = setTimeout(callback, delay);
-  };
 
   const {
     control,
@@ -105,9 +90,16 @@ export default function OnboardingView() {
     }
   };
 
+  const debouncedFetchUsers = useCallback(
+    debounce((query: string) => {
+      fetchUsers(query, 1);
+    }, 500),
+    []
+  );
+
   useEffect(() => {
-    debounce(() => fetchUsers(searchQuery, 1));
-  }, [searchQuery]);
+    debouncedFetchUsers(searchQuery);
+  }, [searchQuery, debouncedFetchUsers]);
 
   useEffect(() => {
     fetchUsers();
@@ -117,7 +109,6 @@ export default function OnboardingView() {
     try {
       setLoading(true);
       await createOffer(data);
-
       reset();
     } catch (err) {
       console.error("Something went wrong", err);

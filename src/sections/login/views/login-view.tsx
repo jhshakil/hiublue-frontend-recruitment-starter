@@ -19,7 +19,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUserLogin } from "@/hooks/auth.hook";
 import { useUser } from "@/context/user.provider";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -76,8 +76,6 @@ const FormSchema = z.object({
 
 export default function SignIn() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect");
 
   const { setIsLoading: userLoading } = useUser();
   const { mutate: handleUserLogin, isPending, isSuccess } = useUserLogin();
@@ -93,7 +91,6 @@ export default function SignIn() {
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
       handleUserLogin(data);
-      
     } catch (error) {
       console.log(error);
     }
@@ -102,11 +99,7 @@ export default function SignIn() {
   React.useEffect(() => {
     if (!isPending && isSuccess) {
       userLoading(true);
-      if (redirect) {
-        router.push(redirect);
-      } else {
-        router.push("/");
-      }
+      router.push("/");
     }
   }, [isPending, isSuccess]);
 

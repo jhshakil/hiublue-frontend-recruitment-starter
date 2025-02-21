@@ -11,7 +11,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     const parsedData = userData ? JSON.parse(userData) : null;
 
     if (!parsedData?.token) {
-      router.push("/login"); // Redirect to login if no token found
+      router.push("/login");
     }
   }, [router]);
 

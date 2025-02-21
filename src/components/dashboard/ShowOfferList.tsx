@@ -71,8 +71,6 @@ export default function OfferList() {
               per_page: limit.toString(),
             });
 
-            console.log(data);
-
             setOffers(data?.data);
             setTotal(data?.meta?.total);
           } catch (error) {
