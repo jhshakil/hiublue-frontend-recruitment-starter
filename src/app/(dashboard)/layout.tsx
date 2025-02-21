@@ -1,5 +1,6 @@
+import HeaderSection from "@/components/shared/header-section";
 import Sidebar from "@/components/shared/sidebar";
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 import type React from "react";
 
 export default function DashboardLayout({
@@ -12,9 +13,10 @@ export default function DashboardLayout({
       <Sidebar />
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, backgroundColor: "background.default" }}
+        sx={{ flexGrow: 1, backgroundColor: "background.default" }}
       >
-        <Container maxWidth="xl">{children}</Container>
+        <HeaderSection />
+        <Box sx={{ px: 6, py: 3 }}>{children}</Box>
       </Box>
     </Box>
   );

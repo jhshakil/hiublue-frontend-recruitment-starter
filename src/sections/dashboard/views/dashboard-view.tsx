@@ -71,7 +71,9 @@ export default function DashboardView() {
         <OfferCountChart offerData={stats?.offers_sent || null} />
       </Box>
       {/* Offer list  */}
-      <ShowOfferList />
+      <Box sx={{ marginTop: "24px" }}>
+        <ShowOfferList />
+      </Box>
     </>
   );
 }

@@ -27,6 +27,7 @@ import {
 import debounce from "lodash/debounce";
 import { getAllOfferList } from "@/services/DashboardService";
 import Image from "next/image";
+import { palette } from "@/theme/palette";
 
 type Offer = {
   id: number;
@@ -117,29 +118,35 @@ export default function OfferList() {
     switch (status) {
       case "Accepted":
         return {
-          bg: "#E8F5E9",
-          color: "#2E7D32",
+          bg: "#22C55E29",
+          color: "#118D57",
         };
       case "Rejected":
         return {
-          bg: "#FFEBEE",
-          color: "#C62828",
+          bg: "#FF563029",
+          color: "#B71D18",
         };
       case "Pending":
         return {
-          bg: "#FFF3E0",
-          color: "#EF6C00",
+          bg: "#FFAB0029",
+          color: "#B76E00",
         };
       default:
         return {
-          bg: "#E0E0E0",
-          color: "#424242",
+          bg: "#22C55E29",
+          color: "#118D57",
         };
     }
   };
 
   return (
-    <Paper sx={{ p: 3 }}>
+    <Paper
+      sx={{
+        p: 3,
+        boxShadow:
+          "0px 12px 24px -4px rgba(145, 158, 171, 0.12),0px 0px 2px 0px rgba(145, 158, 171, 0.2)",
+      }}
+    >
       <Typography variant="h6" sx={{ mb: 3 }}>
         Offer List
       </Typography>
@@ -203,7 +210,10 @@ export default function OfferList() {
                   <TableCell>
                     <Box>
                       {offer.user_name}
-                      <Typography variant="body2" color="textSecondary">
+                      <Typography
+                        variant="body2"
+                        color={palette.text?.disabled}
+                      >
                         {offer.email}
                       </Typography>
                     </Box>
@@ -220,6 +230,7 @@ export default function OfferList() {
                         backgroundColor: getStatusColor(offer.status).bg,
                         color: getStatusColor(offer.status).color,
                         fontWeight: 500,
+                        borderRadius: "6px",
                       }}
                     />
                   </TableCell>
